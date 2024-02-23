@@ -1,0 +1,27 @@
+nav {
+  background: rgb(86, 0, 160);
+  padding: 5px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+h1.appName {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 60px;
+}
+
+@media(max-width: 500px) {
+  h1.appName {
+    font-size: 30px;
+  }
+}
+
+@media(max-width: 300px) {
+  h1.appName {
+    font-size: 23px;
+  }
+}
