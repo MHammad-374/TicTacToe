@@ -48,8 +48,17 @@ button.game {
     border-radius: 5px;
     margin: auto;
 }
-button.game:hover{
+button.game:hover, button.play:hover{
     background: #d6d5d5;
+}
+button.play{
+    padding: 10px 40px;
+    font-family: "Poppins", sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin: 50px auto;
 }
 
 @media(max-width: 500px) {

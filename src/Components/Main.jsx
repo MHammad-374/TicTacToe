@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './Main.css'
 function Main() {
-
+  let [play, setPlay] = useState(true)
   let [boxArr, setBoxArr] = useState(['', '', '', '', '', '', '', '', ''])
-
-
   let [statement, setStatement] = useState('')
+  const [turn, setTurn] = useState('O')
+  const [finish, setFinish] = useState(false)
+  let [arr, setArr] = useState([])
+
+  let startGame = () => {
+    setPlay(false)
+  }
 
   let win = (pos1, pos2, pos3) => {
     if (pos1 != '' && pos2 != '' && pos3 != '') {
@@ -15,10 +20,6 @@ function Main() {
       }
     }
   }
-
-  const [turn, setTurn] = useState('O')
-  const [finish, setFinish] = useState(false)
-  let [arr, setArr] = useState([])
 
   useEffect(() => {
     if (
@@ -31,13 +32,31 @@ function Main() {
       win(boxArr[0], boxArr[4], boxArr[8]) ||
       win(boxArr[2], boxArr[4], boxArr[6])
     ) {
-      setFinish(true)
+      setTimeout(() => {
+        setFinish(true)
+      }, 100)
+    }
+    else if (
+      boxArr[0] !== '' &&
+      boxArr[1] !== '' &&
+      boxArr[2] !== '' &&
+      boxArr[3] !== '' &&
+      boxArr[4] !== '' &&
+      boxArr[5] !== '' &&
+      boxArr[6] !== '' &&
+      boxArr[7] !== '' &&
+      boxArr[8] !== ''
+
+    ) {
+      setTimeout(() => {
+        setFinish(true)
+        setStatement('Match Tie')
+      }, 100)
     }
   })
 
   let handleTurn = (ind) => {
     if (arr.includes(ind)) {
-      console.log('Already')
     }
     else {
       const newArr = [...boxArr];
@@ -59,39 +78,46 @@ function Main() {
     setFinish(false)
     setTurn('O')
     setArr([])
-
   }
+
+
+
   return (
     <div className='main'>
       <div className="container">
         {
-          finish ?
+          play ?
             (
               <>
-                <h1 className='statement'>{statement}</h1>
-                <button className='game' onClick={() => restartGame()}>Restart Game</button>
+                <button className="play" onClick={() => startGame()}>Play</button>
               </>
             ) : (
-              <div className="box">
-                {
-
-                  boxArr.map((element, index) => {
-                    return (
-                      <>
-                        <button
-                          key={index}
-                          onClick={() => { handleTurn(index) }}
-                          className="innerBox"
-                        >
-                          {element}
-                        </button>
-                      </>
-                    )
-                  })
-                }
-              </div>
+              finish ?
+                (
+                  <>
+                    <h1 className='statement'>{statement}</h1>
+                    <button className='game' onClick={() => restartGame()}>Restart Game</button>
+                  </>
+                ) : (
+                  <div className="box">
+                    {
+                      boxArr.map((element, index) => {
+                        return (
+                          <>
+                            <button
+                              key={index}
+                              onClick={() => { handleTurn(index) }}
+                              className="innerBox"
+                            >
+                              {element}
+                            </button>
+                          </>
+                        )
+                      })
+                    }
+                  </div>
+                )
             )
-
         }
       </div>
     </div>
